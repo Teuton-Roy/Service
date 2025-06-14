@@ -13,430 +13,424 @@
 
 <body>
   <div class="container">
-    <div class="form-wrapper">
-      <!-- Header -->
-      <div class="header">
-        <div class="header-content">
-          <div class="header-icon">🏢</div>
-          <h1>Service Quotation</h1>
+    <div class="header">
+      <h1>Service Quotation</h1>
+      <p>A complete form below to generate your Service Quotation</p>
+    </div>
+
+    <form class="form-container" id="serviceQuotationForm">
+      <!-- Main Form Section -->
+      <div class="section">
+        <div class="section-header">Service Quotation Details</div>
+        <div class="section-content">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="parentESN">Parent ESN Number <span class="required">*</span></label>
+              <select id="parentESN" name="parentESN" class="form-control" required>
+                <option value="">Select</option>
+                <option value="ESN001">ESN001</option>
+                <option value="ESN002">ESN002</option>
+                <option value="ESN003">ESN003</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="apsParking">APS/PS Parking Number</label>
+              <input type="text" id="apsParking" name="apsParking" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="childESN">Child ESN Number</label>
+              <select id="childESN" name="childESN" class="form-control">
+                <option value="">Select</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="amcStartDate">AMC Start Date</label>
+              <input type="date" id="amcStartDate" name="amcStartDate" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="systemType">System Type</label>
+              <select id="systemType" name="systemType" class="form-control">
+                <option value="">Select</option>
+                <option value="211">211</option>
+                <option value="411(2)">411(2)</option>
+                <option value="411(2.6)">411(2.6)</option>
+                <option value="411D">411D</option>
+                <option value="413">413</option>
+                <option value="413(2.6)">413(2.6)</option>
+                <option value="413D">413D</option>
+                <option value="421/443">421/443</option>
+                <option value="421(2.6)">421(2.6)</option>
+                <option value="440">440</option>
+                <option value="440D">440D</option>
+                <option value="440(2.6)">440(2.6)</option>
+                <option value="542">542</option>
+                <option value="543(2.6)">543(2.6)</option>
+                <option value="551">551</option>
+                <option value="551(2.6)">551(2.6)</option>
+                <option value="552">552</option>
+                <option value="552(2.6)">552(2.6)</option>
+                <option value="MR 543">MR 543</option>
+                <option value="PS 580">PS 580</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="amcEndDate">AMC End Date</label>
+              <input type="date" id="amcEndDate" name="amcEndDate" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="amcType">AMC Type</label>
+              <select id="amcType" name="amcType" class="form-control">
+                <option value="">Select</option>
+                <option value="Silver">Silver</option>
+                <option value="Gold">Gold</option>
+                <option value="Platinum">Platinum</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="productType">Product Type</label>
+              <select id="productType" name="productType" class="form-control">
+                <option value="">Select</option>
+                <option value="Automatic">Automatic</option>
+                <option value="Standard">Standard</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="amcRate">AMC Rate</label>
+              <input type="number" id="amcRate" name="amcRate" class="form-control" step="0.01" placeholder="0.00">
+            </div>
+
+            <div class="form-group">
+              <label for="billingSchedule">Billing Schedule</label>
+              <select id="billingSchedule" name="billingSchedule" class="form-control">
+                <option value="">Select</option>
+                <option value="Monthly">Monthly</option>
+                <option value="Quarterly">Quarterly</option>
+                <option value="4 month basis">4 month basis</option>
+                <option value="Half Yearly">Half Yearly</option>
+                <option value="Yearly">Yearly</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="systemQuantity">System Quantity <span class="required">*</span></label>
+              <input type="number" id="systemQuantity" name="systemQuantity" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label for="amcQuotation">AMC Quotation</label>
+              <select id="amcQuotation" name="amcQuotation" class="form-control">
+                <option value="">Select</option>
+                <option value="Pending">Pending</option>
+                <option value="Closed Won">Closed Won</option>
+                <option value="Lost">Lost</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="salesPersonName">Sales Person Name</label>
+              <input type="text" id="salesPersonName" name="salesPersonName" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="paymentTerm">Payment Term</label>
+              <select id="paymentTerm" name="paymentTerm" class="form-control">
+                <option value="">Select</option>
+                <option value="Advance Against Tax Invoice">Advance Against Tax Invoice</option>
+                <option value="Immediate Against Tax Invoice">Immediate Against Tax Invoice</option>
+                <option value="30 days">30 days</option>
+                <option value="60 days">60 days</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="lastAmcContractDate">Last AMC Contract Date</label>
+              <input type="date" id="lastAmcContractDate" name="lastAmcContractDate" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="installationDate">Installation Date</label>
+              <input type="date" id="installationDate" name="installationDate" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="lastContractDate">Last Contract Date</label>
+              <input type="date" id="lastContractDate" name="lastContractDate" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="lastAmcOrderRate">Last AMC Order Rate</label>
+              <input type="number" id="lastAmcOrderRate" name="lastAmcOrderRate" class="form-control" step="0.01"
+                placeholder="0.00">
+            </div>
+
+            <div class="form-group">
+              <label for="quotationApprovalStatus">Quotation Approval Status</label>
+              <select id="quotationApprovalStatus" name="quotationApprovalStatus" class="form-control">
+                <option value="">Select</option>
+                <option value="Approved">Approved</option>
+                <option value="Approval Pending">Approval Pending</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label for="reason">Reason</label>
+              <textarea id="reason" name="reason" class="form-control" rows="3"></textarea>
+            </div>
+          </div>
         </div>
-        <p class="header-subtitle">Complete the form below to generate your service quotation</p>
       </div>
 
-      <form id="quotationForm" class="form">
-        <!-- Main Form Fields -->
-        <div class="form-grid">
-          <!-- Parent ESN Number -->
-          <div class="form-group">
-            <label for="parentESN" class="form-label required">Parent ESN Number</label>
-            <select id="parentESN" name="parentESN" class="form-input" required>
-              <option value="">Select Parent ESN</option>
-              <option value="ESN001">ESN001 - Main System Alpha</option>
-              <option value="ESN002">ESN002 - Main System Beta</option>
-              <option value="ESN003">ESN003 - Main System Gamma</option>
-            </select>
-          </div>
-
-          <!-- Child ESN Number -->
-          <div class="form-group">
-            <label for="childESN" class="form-label">Child ESN Number</label>
-            <select id="childESN" name="childESN" class="form-input" disabled>
-              <option value="">Select Child ESN</option>
-            </select>
-          </div>
-
-          <!-- APS/PS Parking Number -->
-          <div class="form-group">
-            <label for="apsPsParking" class="form-label">APS/PS Parking Number</label>
-            <input type="text" id="apsPsParking" name="apsPsParking" class="form-input"
-              placeholder="Enter parking number">
-          </div>
-
-          <!-- System Type -->
-          <div class="form-group">
-            <label for="systemType" class="form-label required">System Type</label>
-            <select id="systemType" name="systemType" class="form-input" required>
-              <option value="">Select System Type</option>
-              <option value="211">211</option>
-              <option value="411(2)">411(2)</option>
-              <option value="411(2.6)">411(2.6)</option>
-              <option value="411D">411D</option>
-              <option value="413">413</option>
-              <option value="413(2.6)">413(2.6)</option>
-              <option value="413D">413D</option>
-              <option value="421/443">421/443</option>
-              <option value="421(2.6)">421(2.6)</option>
-              <option value="440">440</option>
-              <option value="440D">440D</option>
-              <option value="440(2.6)">440(2.6)</option>
-              <option value="542">542</option>
-              <option value="543(2.6)">543(2.6)</option>
-              <option value="551">551</option>
-              <option value="551(2.6)">551(2.6)</option>
-              <option value="552">552</option>
-              <option value="552(2.6)">552(2.6)</option>
-              <option value="MR 543">MR 543</option>
-              <option value="PS 580">PS 580</option>
-            </select>
-          </div>
-
-          <!-- AMC Start Date -->
-          <div class="form-group">
-            <label for="amcStartDate" class="form-label required">AMC Start Date</label>
-            <input type="date" id="amcStartDate" name="amcStartDate" class="form-input" required>
-          </div>
-
-          <!-- AMC End Date -->
-          <div class="form-group">
-            <label for="amcEndDate" class="form-label required">AMC End Date</label>
-            <input type="date" id="amcEndDate" name="amcEndDate" class="form-input" required>
-          </div>
-
-          <!-- AMC Type -->
-          <div class="form-group">
-            <label for="amcType" class="form-label required">AMC Type</label>
-            <select id="amcType" name="amcType" class="form-input" required>
-              <option value="">Select AMC Type</option>
-              <option value="Silver">Silver</option>
-              <option value="Gold">Gold</option>
-              <option value="Platinum">Platinum</option>
-            </select>
-          </div>
-
-          <!-- Product Type -->
-          <div class="form-group">
-            <label for="productType" class="form-label">Product Type</label>
-            <select id="productType" name="productType" class="form-input">
-              <option value="">Select Product Type</option>
-              <option value="Automatic">Automatic</option>
-              <option value="Standard">Standard</option>
-            </select>
-          </div>
-
-          <!-- AMC Rate -->
-          <div class="form-group">
-            <label for="amcRate" class="form-label">AMC Rate</label>
-            <input type="number" id="amcRate" name="amcRate" class="form-input" step="0.01" placeholder="0.00">
-          </div>
-
-          <!-- Billing Schedule -->
-          <div class="form-group">
-            <label for="billingSchedule" class="form-label">Billing Schedule</label>
-            <select id="billingSchedule" name="billingSchedule" class="form-input">
-              <option value="">Select Billing Schedule</option>
-              <option value="Monthly">Monthly</option>
-              <option value="Quarterly">Quarterly</option>
-              <option value="4 month basis">4 month basis</option>
-              <option value="Half Yearly">Half Yearly</option>
-              <option value="Yearly">Yearly</option>
-            </select>
-          </div>
-
-          <!-- System Quantity -->
-          <div class="form-group">
-            <label for="systemQuantity" class="form-label">System Quantity</label>
-            <input type="number" id="systemQuantity" name="systemQuantity" class="form-input" placeholder="0">
-          </div>
-
-          <!-- AMC Quotation -->
-          <div class="form-group">
-            <label for="amcQuotation" class="form-label">AMC Quotation</label>
-            <select id="amcQuotation" name="amcQuotation" class="form-input">
-              <option value="">Select Status</option>
-              <option value="Pending">Pending</option>
-              <option value="Closed Won">Closed Won</option>
-              <option value="Lost">Lost</option>
-            </select>
-          </div>
-
-          <!-- Sales Person Name -->
-          <div class="form-group">
-            <label for="salesPersonName" class="form-label">Sales Person Name</label>
-            <input type="text" id="salesPersonName" name="salesPersonName" class="form-input"
-              placeholder="Enter sales person name">
-          </div>
-
-          <!-- Payment Term -->
-          <div class="form-group">
-            <label for="paymentTerm" class="form-label">Payment Term</label>
-            <select id="paymentTerm" name="paymentTerm" class="form-input">
-              <option value="">Select Payment Term</option>
-              <option value="Advance Against Tax Invoice">Advance Against Tax Invoice</option>
-              <option value="Immediate Against Tax Invoice">Immediate Against Tax Invoice</option>
-              <option value="30 days">30 days</option>
-              <option value="60 days">60 days</option>
-            </select>
-          </div>
-
-          <!-- Last AMC Contract Date -->
-          <div class="form-group">
-            <label for="lastAMCContractDate" class="form-label">Last AMC Contract Date</label>
-            <input type="date" id="lastAMCContractDate" name="lastAMCContractDate" class="form-input">
-          </div>
-
-          <!-- Last Contract Date -->
-          <div class="form-group">
-            <label for="lastContractDate" class="form-label">Last Contract Date</label>
-            <input type="date" id="lastContractDate" name="lastContractDate" class="form-input">
-          </div>
-
-          <!-- Installation Date -->
-          <div class="form-group">
-            <label for="installationDate" class="form-label">Installation Date</label>
-            <input type="date" id="installationDate" name="installationDate" class="form-input">
-          </div>
-
-          <!-- Last AMC Order Rate -->
-          <div class="form-group">
-            <label for="lastAMCOrderRate" class="form-label">Last AMC Order Rate</label>
-            <input type="number" id="lastAMCOrderRate" name="lastAMCOrderRate" class="form-input" step="0.01"
-              placeholder="0.00">
-          </div>
-
-          <!-- Quotation Approval Status -->
-          <div class="form-group">
-            <label for="quotationApprovalStatus" class="form-label">Quotation Approval Status</label>
-            <select id="quotationApprovalStatus" name="quotationApprovalStatus" class="form-input">
-              <option value="">Select Status</option>
-              <option value="Approved">Approved</option>
-              <option value="Approval Pending">Approval Pending</option>
-              <option value="Rejected">Rejected</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Reason Field -->
-        <div class="form-group full-width">
-          <label for="reason" class="form-label">Reason</label>
-          <textarea id="reason" name="reason" class="form-input" rows="4" placeholder="Enter reason..."></textarea>
-        </div>
-
-        <!-- Information Section -->
-        <div class="section">
-          <h2 class="section-title">Information</h2>
-          <div class="section-grid">
+      <!-- Information Sub-form -->
+      <div class="section">
+        <div class="section-header">Information</div>
+        <div class="section-content">
+          <div class="form-grid">
             <div class="form-group">
-              <label for="customerName" class="form-label">Customer Name</label>
-              <input type="text" id="customerName" name="customerName" class="form-input"
-                placeholder="Enter customer name">
+              <label for="customerName">Customer Name</label>
+              <input type="text" id="customerName" name="customerName" class="form-control">
             </div>
+
             <div class="form-group">
-              <label for="subApsPsNumber" class="form-label">Sub-APS/PS Number</label>
-              <input type="text" id="subApsPsNumber" name="subApsPsNumber" class="form-input"
-                placeholder="Enter sub number">
+              <label for="subApsNumber">Sub-APS/PS Number</label>
+              <input type="text" id="subApsNumber" name="subApsNumber" class="form-control">
             </div>
+
             <div class="form-group">
-              <label for="projectName" class="form-label">Project Name</label>
-              <input type="text" id="projectName" name="projectName" class="form-input"
-                placeholder="Enter project name">
+              <label for="projectName">Project Name</label>
+              <input type="text" id="projectName" name="projectName" class="form-control">
             </div>
+
             <div class="form-group">
-              <label for="invoiceNumber" class="form-label">Invoice Number</label>
-              <input type="text" id="invoiceNumber" name="invoiceNumber" class="form-input"
-                placeholder="Enter invoice number">
+              <label for="invoiceNumber">Invoice Number</label>
+              <input type="text" id="invoiceNumber" name="invoiceNumber" class="form-control">
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Product Information Section -->
-        <div class="section">
-          <div class="section-header">
-            <h2 class="section-title">📧 Product Information</h2>
-            <button type="button" id="addProductBtn" class="btn-add">+ Add Product</button>
+      <!-- Product Information Sub-form -->
+      <div class="section">
+        <div class="section-header">Product Information</div>
+        <div class="section-content">
+          <div class="table-container">
+            <table class="data-table" id="productTable">
+              <thead>
+                <tr>
+                  <th>Product Name</th>
+                  <th>Product Code</th>
+                  <th>Quantity</th>
+                  <th>List Price (₹)</th>
+                  <th>Total Amount (₹)</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="productTableBody">
+                <tr>
+                  <td>
+                    <select name="productName[]" class="product-lookup">
+                      <option value="">Select Product</option>
+                      <option value="Product A">Product A</option>
+                      <option value="Product B">Product B</option>
+                      <option value="Product C">Product C</option>
+                    </select>
+                  </td>
+                  <td><input type="text" name="productCode[]" class="product-code"></td>
+                  <td><input type="number" name="quantity[]" class="quantity" step="0.01"
+                      oninput="calculateRowTotal(this)"></td>
+                  <td><input type="number" name="listPrice[]" class="list-price" step="0.01"
+                      oninput="calculateRowTotal(this)"></td>
+                  <td><input type="number" name="totalAmount[]" class="total-amount" step="0.01" readonly></td>
+                  <td><button type="button" class="remove-row-btn" onclick="removeProductRow(this)">Remove</button></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-
-          <div id="productsContainer">
-            <div class="no-products">
-              <p>No products added yet. Click "Add Product" to start.</p>
-            </div>
-          </div>
+          <button type="button" class="add-row-btn" onclick="addProductRow()">Add Product</button>
         </div>
+      </div>
 
-        <!-- Grand Total -->
-        <div class="grand-total">
-          <div class="grand-total-content">
-            <h2>Grand Total</h2>
-            <div class="grand-total-amount" id="grandTotalAmount">₹0.00</div>
-          </div>
+      <!-- Grand Total -->
+      <div class="grand-total">
+        <div class="form-group">
+          <label for="grandTotal">Grand Total (₹)</label>
+          <input type="number" id="grandTotal" name="grandTotal" class="form-control" step="0.01" readonly>
         </div>
+      </div>
 
-        <!-- Address Information -->
-        <div class="address-grid">
-          <!-- Billing Address -->
-          <div class="address-section billing">
-            <h2 class="address-title">📍 Billing Address</h2>
-            <div class="address-fields">
-              <div class="form-group">
-                <label for="billingStreet1" class="form-label">Street 1</label>
-                <input type="text" id="billingStreet1" name="billingStreet1" class="form-input"
-                  placeholder="Enter street address">
-              </div>
-              <div class="form-group">
-                <label for="billingStreet2" class="form-label">Street 2</label>
-                <input type="text" id="billingStreet2" name="billingStreet2" class="form-input"
-                  placeholder="Enter street address">
-              </div>
-              <div class="form-group">
-                <label for="billingStreet3" class="form-label">Street 3</label>
-                <input type="text" id="billingStreet3" name="billingStreet3" class="form-input"
-                  placeholder="Enter street address">
-              </div>
-              <div class="form-row">
+      <!-- Customer Address Information -->
+      <div class="section">
+        <div class="section-header">Customer Address Information</div>
+        <div class="section-content">
+          <div class="address-grid">
+            <!-- Billing Address -->
+            <div class="address-section">
+              <div class="address-header">Billing Address</div>
+              <div class="address-content">
                 <div class="form-group">
-                  <label for="billingCity" class="form-label">City</label>
-                  <input type="text" id="billingCity" name="billingCity" class="form-input" placeholder="Enter city">
+                  <label for="billingStreet1">Billing Street 1</label>
+                  <input type="text" id="billingStreet1" name="billingStreet1" class="form-control">
                 </div>
                 <div class="form-group">
-                  <label for="billingPostalCode" class="form-label">Postal Code</label>
-                  <input type="text" id="billingPostalCode" name="billingPostalCode" class="form-input"
-                    placeholder="Enter postal code">
+                  <label for="billingStreet2">Billing Street 2</label>
+                  <input type="text" id="billingStreet2" name="billingStreet2" class="form-control">
                 </div>
-              </div>
-              <div class="form-row">
                 <div class="form-group">
-                  <label for="billingState" class="form-label">State</label>
-                  <select id="billingState" name="billingState" class="form-input">
-                    <option value="">Select State</option>
-                    <option value="AN (Andaman and Nico.Is.)">AN (Andaman and Nico.Is.)</option>
-                    <option value="AP (Andhra Pradesh)">AP (Andhra Pradesh)</option>
-                    <option value="AR (Arunachal Pradesh)">AR (Arunachal Pradesh)</option>
-                    <option value="AS (Assam)">AS (Assam)</option>
-                    <option value="BR (Bihar)">BR (Bihar)</option>
-                    <option value="CG (Chhattisgarh)">CG (Chhattisgarh)</option>
-                    <option value="CH (Chandigarh)">CH (Chandigarh)</option>
-                    <option value="DH (DadraNagHavDamanDiu)">DH (DadraNagHavDamanDiu)</option>
-                    <option value="DL (Delhi)">DL (Delhi)</option>
-                    <option value="GA (Goa)">GA (Goa)</option>
-                    <option value="GJ (Gujarat)">GJ (Gujarat)</option>
-                    <option value="HP (Himachal Pradesh)">HP (Himachal Pradesh)</option>
-                    <option value="HR (Haryana)">HR (Haryana)</option>
-                    <option value="JH (Jharkhand)">JH (Jharkhand)</option>
-                    <option value="JK (Jammu and Kashmir)">JK (Jammu and Kashmir)</option>
-                    <option value="KA (Karnataka)">KA (Karnataka)</option>
-                    <option value="KL (Kerala)">KL (Kerala)</option>
-                    <option value="LA (Ladakh)">LA (Ladakh)</option>
-                    <option value="LD (Lakshadweep)">LD (Lakshadweep)</option>
-                    <option value="MH (Maharashtra)">MH (Maharashtra)</option>
-                    <option value="ML (Megalaya)">ML (Megalaya)</option>
-                    <option value="MN (Manipur)">MN (Manipur)</option>
-                    <option value="MP (Madhya Pradesh)">MP (Madhya Pradesh)</option>
-                    <option value="MZ (Mizoram)">MZ (Mizoram)</option>
-                    <option value="NL (Nagaland)">NL (Nagaland)</option>
-                    <option value="OD (Odisha)">OD (Odisha)</option>
-                    <option value="PB (Punjab)">PB (Punjab)</option>
-                    <option value="PY (Pondicherry)">PY (Pondicherry)</option>
-                    <option value="RJ (Rajasthan)">RJ (Rajasthan)</option>
-                    <option value="SK (Sikkim)">SK (Sikkim)</option>
-                    <option value="TN (Tamil Nadu)">TN (Tamil Nadu)</option>
-                    <option value="TR (Tripura)">TR (Tripura)</option>
-                    <option value="TS (Telangana)">TS (Telangana)</option>
-                    <option value="UK (Uttarakhand)">UK (Uttarakhand)</option>
-                    <option value="UP (Uttar Pradesh)">UP (Uttar Pradesh)</option>
-                    <option value="WB (West Bengal)">WB (West Bengal)</option>
+                  <label for="billingStreet3">Billing Street 3</label>
+                  <input type="text" id="billingStreet3" name="billingStreet3" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="billingCity">Billing City</label>
+                  <input type="text" id="billingCity" name="billingCity" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="billingPostalCode">Billing Postal Code</label>
+                  <input type="text" id="billingPostalCode" name="billingPostalCode" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="billingState">Billing State</label>
+                  <select id="billingState" name="billingState" class="form-control">
+                    <option value="">Select</option>
+                    <option value="AN">AN (Andaman and Nico.Is.)</option>
+                    <option value="AP">AP (Andhra Pradesh)</option>
+                    <option value="AR">AR (Arunachal Pradesh)</option>
+                    <option value="AS">AS (Assam)</option>
+                    <option value="BR">BR (Bihar)</option>
+                    <option value="CG">CG (Chhattisgarh)</option>
+                    <option value="CH">CH (Chandigarh)</option>
+                    <option value="DH">DH (DadraNagHavDamanDiu)</option>
+                    <option value="DL">DL (Delhi)</option>
+                    <option value="GA">GA (Goa)</option>
+                    <option value="GJ">GJ (Gujarat)</option>
+                    <option value="HP">HP (Himachal Pradesh)</option>
+                    <option value="HR">HR (Haryana)</option>
+                    <option value="JH">JH (Jharkhand)</option>
+                    <option value="JK">JK (Jammu and Kashmir)</option>
+                    <option value="KA">KA (Karnataka)</option>
+                    <option value="KL">KL (Kerala)</option>
+                    <option value="LA">LA (Ladakh)</option>
+                    <option value="LD">LD (Lakshadweep)</option>
+                    <option value="MH">MH (Maharashtra)</option>
+                    <option value="ML">ML (Megalaya)</option>
+                    <option value="MN">MN (Manipur)</option>
+                    <option value="MP">MP (Madhya Pradesh)</option>
+                    <option value="MZ">MZ (Mizoram)</option>
+                    <option value="NL">NL (Nagaland)</option>
+                    <option value="OD">OD (Odisha)</option>
+                    <option value="PB">PB (Punjab)</option>
+                    <option value="PY">PY (Pondicherry)</option>
+                    <option value="RJ">RJ (Rajasthan)</option>
+                    <option value="SK">SK (Sikkim)</option>
+                    <option value="TN">TN (Tamil Nadu)</option>
+                    <option value="TR">TR (Tripura)</option>
+                    <option value="TS">TS (Telangana)</option>
+                    <option value="UK">UK (Uttarakhand)</option>
+                    <option value="UP">UP (Uttar Pradesh)</option>
+                    <option value="WB">WB (West Bengal)</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="billingCountry" class="form-label">Country</label>
-                  <input type="text" id="billingCountry" name="billingCountry" class="form-input"
-                    placeholder="Enter country">
+                  <label for="billingCountry">Billing Country</label>
+                  <input type="text" id="billingCountry" name="billingCountry" class="form-control" value="India">
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- Shipping Address -->
-          <div class="address-section shipping">
-            <div class="address-header">
-              <h2 class="address-title">📍 Shipping Address</h2>
-              <button type="button" id="copyBillingBtn" class="btn-copy">Copy from Billing</button>
-            </div>
-            <div class="address-fields">
-              <div class="form-group">
-                <label for="shippingStreet1" class="form-label">Street 1</label>
-                <input type="text" id="shippingStreet1" name="shippingStreet1" class="form-input"
-                  placeholder="Enter street address">
+            <!-- Shipping Address -->
+            <div class="address-section">
+              <div class="address-header">
+                Shipping Address
+                <label style="float: right; font-weight: normal; font-size: 12px;">
+                  <input type="checkbox" id="sameAsBilling" onchange="copyBillingToShipping()"> Same as Billing
+                </label>
               </div>
-              <div class="form-group">
-                <label for="shippingStreet2" class="form-label">Street 2</label>
-                <input type="text" id="shippingStreet2" name="shippingStreet2" class="form-input"
-                  placeholder="Enter street address">
-              </div>
-              <div class="form-group">
-                <label for="shippingStreet3" class="form-label">Street 3</label>
-                <input type="text" id="shippingStreet3" name="shippingStreet3" class="form-input"
-                  placeholder="Enter street address">
-              </div>
-              <div class="form-row">
+              <div class="address-content">
                 <div class="form-group">
-                  <label for="shippingCity" class="form-label">City</label>
-                  <input type="text" id="shippingCity" name="shippingCity" class="form-input" placeholder="Enter city">
+                  <label for="shippingStreet1">Shipping Street 1</label>
+                  <input type="text" id="shippingStreet1" name="shippingStreet1" class="form-control">
                 </div>
                 <div class="form-group">
-                  <label for="shippingPostalCode" class="form-label">Postal Code</label>
-                  <input type="text" id="shippingPostalCode" name="shippingPostalCode" class="form-input"
-                    placeholder="Enter postal code">
+                  <label for="shippingStreet2">Shipping Street 2</label>
+                  <input type="text" id="shippingStreet2" name="shippingStreet2" class="form-control">
                 </div>
-              </div>
-              <div class="form-row">
                 <div class="form-group">
-                  <label for="shippingState" class="form-label">State</label>
-                  <select id="shippingState" name="shippingState" class="form-input">
-                    <option value="">Select State</option>
-                    <option value="AN (Andaman and Nico.Is.)">AN (Andaman and Nico.Is.)</option>
-                    <option value="AP (Andhra Pradesh)">AP (Andhra Pradesh)</option>
-                    <option value="AR (Arunachal Pradesh)">AR (Arunachal Pradesh)</option>
-                    <option value="AS (Assam)">AS (Assam)</option>
-                    <option value="BR (Bihar)">BR (Bihar)</option>
-                    <option value="CG (Chhattisgarh)">CG (Chhattisgarh)</option>
-                    <option value="CH (Chandigarh)">CH (Chandigarh)</option>
-                    <option value="DH (DadraNagHavDamanDiu)">DH (DadraNagHavDamanDiu)</option>
-                    <option value="DL (Delhi)">DL (Delhi)</option>
-                    <option value="GA (Goa)">GA (Goa)</option>
-                    <option value="GJ (Gujarat)">GJ (Gujarat)</option>
-                    <option value="HP (Himachal Pradesh)">HP (Himachal Pradesh)</option>
-                    <option value="HR (Haryana)">HR (Haryana)</option>
-                    <option value="JH (Jharkhand)">JH (Jharkhand)</option>
-                    <option value="JK (Jammu and Kashmir)">JK (Jammu and Kashmir)</option>
-                    <option value="KA (Karnataka)">KA (Karnataka)</option>
-                    <option value="KL (Kerala)">KL (Kerala)</option>
-                    <option value="LA (Ladakh)">LA (Ladakh)</option>
-                    <option value="LD (Lakshadweep)">LD (Lakshadweep)</option>
-                    <option value="MH (Maharashtra)">MH (Maharashtra)</option>
-                    <option value="ML (Megalaya)">ML (Megalaya)</option>
-                    <option value="MN (Manipur)">MN (Manipur)</option>
-                    <option value="MP (Madhya Pradesh)">MP (Madhya Pradesh)</option>
-                    <option value="MZ (Mizoram)">MZ (Mizoram)</option>
-                    <option value="NL (Nagaland)">NL (Nagaland)</option>
-                    <option value="OD (Odisha)">OD (Odisha)</option>
-                    <option value="PB (Punjab)">PB (Punjab)</option>
-                    <option value="PY (Pondicherry)">PY (Pondicherry)</option>
-                    <option value="RJ (Rajasthan)">RJ (Rajasthan)</option>
-                    <option value="SK (Sikkim)">SK (Sikkim)</option>
-                    <option value="TN (Tamil Nadu)">TN (Tamil Nadu)</option>
-                    <option value="TR (Tripura)">TR (Tripura)</option>
-                    <option value="TS (Telangana)">TS (Telangana)</option>
-                    <option value="UK (Uttarakhand)">UK (Uttarakhand)</option>
-                    <option value="UP (Uttar Pradesh)">UP (Uttar Pradesh)</option>
-                    <option value="WB (West Bengal)">WB (West Bengal)</option>
+                  <label for="shippingStreet3">Shipping Street 3</label>
+                  <input type="text" id="shippingStreet3" name="shippingStreet3" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="shippingCity">Shipping City</label>
+                  <input type="text" id="shippingCity" name="shippingCity" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="shippingPostalCode">Shipping Postal Code</label>
+                  <input type="text" id="shippingPostalCode" name="shippingPostalCode" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="shippingState">Shipping State</label>
+                  <select id="shippingState" name="shippingState" class="form-control">
+                    <option value="">Select</option>
+                    <option value="AN">AN (Andaman and Nico.Is.)</option>
+                    <option value="AP">AP (Andhra Pradesh)</option>
+                    <option value="AR">AR (Arunachal Pradesh)</option>
+                    <option value="AS">AS (Assam)</option>
+                    <option value="BR">BR (Bihar)</option>
+                    <option value="CG">CG (Chhattisgarh)</option>
+                    <option value="CH">CH (Chandigarh)</option>
+                    <option value="DH">DH (DadraNagHavDamanDiu)</option>
+                    <option value="DL">DL (Delhi)</option>
+                    <option value="GA">GA (Goa)</option>
+                    <option value="GJ">GJ (Gujarat)</option>
+                    <option value="HP">HP (Himachal Pradesh)</option>
+                    <option value="HR">HR (Haryana)</option>
+                    <option value="JH">JH (Jharkhand)</option>
+                    <option value="JK">JK (Jammu and Kashmir)</option>
+                    <option value="KA">KA (Karnataka)</option>
+                    <option value="KL">KL (Kerala)</option>
+                    <option value="LA">LA (Ladakh)</option>
+                    <option value="LD">LD (Lakshadweep)</option>
+                    <option value="MH">MH (Maharashtra)</option>
+                    <option value="ML">ML (Megalaya)</option>
+                    <option value="MN">MN (Manipur)</option>
+                    <option value="MP">MP (Madhya Pradesh)</option>
+                    <option value="MZ">MZ (Mizoram)</option>
+                    <option value="NL">NL (Nagaland)</option>
+                    <option value="OD">OD (Odisha)</option>
+                    <option value="PB">PB (Punjab)</option>
+                    <option value="PY">PY (Pondicherry)</option>
+                    <option value="RJ">RJ (Rajasthan)</option>
+                    <option value="SK">SK (Sikkim)</option>
+                    <option value="TN">TN (Tamil Nadu)</option>
+                    <option value="TR">TR (Tripura)</option>
+                    <option value="TS">TS (Telangana)</option>
+                    <option value="UK">UK (Uttarakhand)</option>
+                    <option value="UP">UP (Uttar Pradesh)</option>
+                    <option value="WB">WB (West Bengal)</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="shippingCountry" class="form-label">Country</label>
-                  <input type="text" id="shippingCountry" name="shippingCountry" class="form-input"
-                    placeholder="Enter country">
+                  <label for="shippingCountry">Shipping Country</label>
+                  <input type="text" id="shippingCountry" name="shippingCountry" class="form-control" value="India">
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Form Actions -->
-        <div class="form-actions">
-          <button type="button" id="resetBtn" class="btn-secondary">Reset</button>
-          <button type="submit" class="btn-primary">Submit Quotation</button>
-        </div>
-      </form>
-    </div>
+      <!-- Submit Buttons -->
+      <div class="button-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
+      </div>
+    </form>
   </div>
 </body>
 
