@@ -39,12 +39,12 @@
               <input type="text" id="apsParking" name="apsParking" class="form-control">
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="childESN">Child ESN Number</label>
               <select id="childESN" name="childESN" class="form-control">
                 <option value="">Select</option>
               </select>
-            </div>
+            </div> -->
 
             <div class="form-group">
               <label for="amcStartDate">AMC Start Date</label>
@@ -189,6 +189,40 @@
         </div>
       </div>
 
+      <!-- Child ESN Number Table Section -->
+        <div class="section">
+        <div class="section-header">Child ESN Numbers</div>
+        <div class="section-content">
+          <div class="table-container">
+            <table class="data-table" id="childEsnTable">
+              <thead>
+                <tr>
+                  <th>Parent ESN Number</th>
+                  <th>Child ESN Number</th>
+                  <th>IRN No</th>
+                  <th>Created Time</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="childEsnTableBody">
+                <tr>
+                  <td>
+                    <input type="text" name="childParentEsn[]" class="form-control">
+                  </td>
+                  <td><input type="text" name="childEsnNumber[]" class="form-control"></td>
+                  <td><input type="text" name="irnNo[]" class="form-control"></td>
+                  <td><input type="datetime-local" name="createdTime[]" class="form-control"></td>
+                  <td>
+                    <button type="button" class="remove-row-btn" onclick="removeChildEsnRow(this)">Remove</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- <button type="button" class="add-row-btn" onclick="addChildEsnRow()">Add Child ESN</button> -->
+        </div>
+      </div>
+
       <!-- Information Sub-form -->
       <div class="section">
         <div class="section-header">Information</div>
@@ -254,7 +288,7 @@
               </tbody>
             </table>
           </div>
-          <button type="button" class="add-row-btn" onclick="addProductRow()">Add Product</button>
+          <!-- <button type="button" class="add-row-btn" onclick="addProductRow()">Add Product</button> -->
         </div>
       </div>
 
