@@ -36,16 +36,13 @@
               <input type="text" id="apsParking" name="apsParking" class="form-control">
             </div>
 
-            <!-- <div class="form-group">
-              <label for="childESN">Child ESN Number</label>
-              <select id="childESN" name="childESN" class="form-control">
-                <option value="">Select</option>
-              </select>
-            </div> -->
-
             <div class="form-group">
-              <label for="amcStartDate">AMC Start Date</label>
-              <input type="date" id="amcStartDate" name="amcStartDate" class="form-control">
+              <label for="productType">Product Type</label>
+              <select id="productType" name="productType" class="form-control">
+                <option value="">Select</option>
+                <option value="Automatic">Automatic</option>
+                <option value="Standard">Standard</option>
+              </select>
             </div>
 
             <div class="form-group">
@@ -65,6 +62,8 @@
                 <option value="440D">440D</option>
                 <option value="440(2.6)">440(2.6)</option>
                 <option value="542">542</option>
+                <option value="542(2.6)">542(2.6)</option>
+                <option value="543">543</option>
                 <option value="543(2.6)">543(2.6)</option>
                 <option value="551">551</option>
                 <option value="551(2.6)">551(2.6)</option>
@@ -73,11 +72,6 @@
                 <option value="MR 543">MR 543</option>
                 <option value="PS 580">PS 580</option>
               </select>
-            </div>
-
-            <div class="form-group">
-              <label for="amcEndDate">AMC End Date</label>
-              <input type="date" id="amcEndDate" name="amcEndDate" class="form-control">
             </div>
 
             <div class="form-group">
@@ -91,17 +85,23 @@
             </div>
 
             <div class="form-group">
-              <label for="productType">Product Type</label>
-              <select id="productType" name="productType" class="form-control">
-                <option value="">Select</option>
-                <option value="Automatic">Automatic</option>
-                <option value="Standard">Standard</option>
-              </select>
+              <label for="amcRate">AMC Rate</label>
+              <input type="number" id="amcRate" name="amcRate" class="form-control" step="0.01" placeholder="0.00">
             </div>
 
             <div class="form-group">
-              <label for="amcRate">AMC Rate</label>
-              <input type="number" id="amcRate" name="amcRate" class="form-control" step="0.01" placeholder="0.00">
+              <label for="systemQuantity">System Quantity <span class="required">*</span></label>
+              <input type="number" id="systemQuantity" name="systemQuantity" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label for="amcStartDate">AMC Start Date</label>
+              <input type="date" id="amcStartDate" name="amcStartDate" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="amcEndDate">AMC End Date</label>
+              <input type="date" id="amcEndDate" name="amcEndDate" class="form-control">
             </div>
 
             <div class="form-group">
@@ -117,13 +117,8 @@
             </div>
 
             <div class="form-group">
-              <label for="systemQuantity">System Quantity <span class="required">*</span></label>
-              <input type="number" id="systemQuantity" name="systemQuantity" class="form-control" required>
-            </div>
-
-            <div class="form-group">
-              <label for="amcQuotation">AMC Quotation</label>
-              <select id="amcQuotation" name="amcQuotation" class="form-control">
+              <label for="amcQuotationStatus">AMC Quotation Status</label>
+              <select id="amcQuotationStatus" name="amcQuotationStatus" class="form-control">
                 <option value="">Select</option>
                 <option value="Pending">Pending</option>
                 <option value="Closed Won">Closed Won</option>
@@ -178,7 +173,7 @@
               </select>
             </div>
 
-            <div class="form-group" style="grid-column: 1 / -1;">
+            <div class="form-group" id="reasonContainer" style="grid-column: 1 / -1; display: none;">
               <label for="reason">Reason</label>
               <textarea id="reason" name="reason" class="form-control" rows="3"></textarea>
             </div>

@@ -356,3 +356,24 @@ function setDropdownValue(selectId, value) {
   }
 }
 
+// The Reason field will only be visible when "AMC Quotation Status" is set to "Lost".
+document.addEventListener('DOMContentLoaded', function () {
+  const amcStatus = document.getElementById('amcQuotationStatus');
+  const reasonContainer = document.getElementById('reasonContainer');
+  if (amcStatus && reasonContainer) {
+    amcStatus.addEventListener('change', function () {
+      if (this.value === 'Lost') {
+        reasonContainer.style.display = '';
+      } else {
+        reasonContainer.style.display = 'none';
+      }
+    });
+    // Initial check in case of pre-filled value
+    if (amcStatus.value === 'Lost') {
+      reasonContainer.style.display = '';
+    } else {
+      reasonContainer.style.display = 'none';
+    }
+  }
+});
+
