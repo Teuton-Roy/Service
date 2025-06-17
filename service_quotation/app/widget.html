@@ -189,22 +189,22 @@
             <table class="data-table" id="childEsnTable">
               <thead>
                 <tr>
+                  <th>Action</th>
                   <th>Parent ESN Number</th>
                   <th>Child ESN Number</th>
                   <th>IRN No</th>
                   <th>Created Time</th>
-                  <th>Action</th>
                 </tr>
               </thead>
               <tbody id="childEsnTableBody">
                 <tr>
+                  <td><input type="checkbox" id="childEsnCheckbox" name="childEsnCheckbox"></td>
                   <td>
                     <input type="text" name="childParentEsn[]" class="form-control" readonly>
                   </td>
                   <td><input type="text" name="childEsnNumber[]" class="form-control" readonly></td>
                   <td><input type="text" name="irnNo[]" class="form-control" readonly></td>
                   <td><input type="datetime-local" name="createdTime[]" class="form-control" readonly></td>
-                  <td><input type="checkbox" id="childEsnCheckbox" name="childEsnCheckbox"></td>
                 </tr>
               </tbody>
             </table>

@@ -233,16 +233,11 @@ function populateChildEsnTable(parentEsn, allRecords) {
     filtered.forEach(function (rec, idx) {
       const tr = document.createElement('tr');
       tr.innerHTML = `
+        <td><input type="checkbox" id="childEsnCheckbox" name="childEsnCheckbox"></td>
         <td><input type="text" name="childParentEsn[]" class="form-control" value="${rec.Parent_ESN_Number || ''}" readonly></td>
-        <td>
-          <select name="childEsnNumber[]" class="form-control child-esn-select" data-row="${idx}">
-            <option value="">Select</option>
-            ${childEsnNumbers.map(esn => `<option value="${esn}" ${esn === rec.Child_ESN_Number ? 'selected' : ''}>${esn}</option>`).join('')}
-          </select>
-        </td>
+        <td><input type="text" name="childEsnNumber[]" class="form-control" value="${rec.Child_ESN_Number || ''}" readonly></td>
         <td><input type="text" name="irnNo[]" class="form-control" value="${rec.IRN_Number || ''}" readonly></td>
         <td><input type="datetime-local" name="createdTime[]" class="form-control" value="${rec.Added_Time ? new Date(rec.Added_Time).toISOString().slice(0,16) : ''}" readonly></td>
-        <td><input type="checkbox" id="childEsnCheckbox" name="childEsnCheckbox"></td>
       `;
       // <td><button type="button" class="select-row-btn" onclick="onChildEsnRowSelect(this)">Select</button></td>
       tbody.appendChild(tr);
@@ -263,13 +258,12 @@ function addBlankChildEsnRow() {
   const tbody = document.getElementById('childEsnTableBody');
   const tr = document.createElement('tr');
   tr.innerHTML = `
+    <td><input type="checkbox" id="childEsnCheckbox" name="childEsnCheckbox"></td>
     <td><input type="text" name="childParentEsn[]" class="form-control"></td>
     <td><input type="text" name="childEsnNumber[]" class="form-control"></td>
     <td><input type="text" name="irnNo[]" class="form-control"></td>
     <td><input type="datetime-local" name="createdTime[]" class="form-control"></td>
-    <td><input type="checkbox" id="childEsnCheckbox" name="childEsnCheckbox"></td>
   `;
-  // <td><button type="button" class="select-row-btn" onclick="onChildEsnRowSelect(this)">Select</button></td>
   tbody.appendChild(tr);
 }
 
@@ -428,5 +422,18 @@ document.addEventListener('DOMContentLoaded', function () {
   if (systemType && amcType) {
     systemType.addEventListener('change', fetchAmcRate);
     amcType.addEventListener('change', fetchAmcRate);
+  }
+});
+
+// prevent users from selecting a date before today in the AMC Start Date field
+document.addEventListener('DOMContentLoaded', function () {
+  const amcStartDate = document.getElementById('amcStartDate');
+  if (amcStartDate) {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const minDate = `${yyyy}-${mm}-${dd}`;
+    amcStartDate.setAttribute('min', minDate);
   }
 });
