@@ -377,3 +377,56 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+// auto-fetch the AMC Rate based on the selected System Type and AMC Type
+document.addEventListener('DOMContentLoaded', function () {
+  const systemType = document.getElementById('systemType');
+  const amcType = document.getElementById('amcType');
+  const amcRate = document.getElementById('amcRate');
+
+  function fetchAmcRate() {
+    const systemTypeVal = systemType.value;
+    const amcTypeVal = amcType.value;
+    if (!systemTypeVal || !amcTypeVal) {
+      amcRate.value = '';
+      return;
+    }
+    console.log(systemTypeVal, amcTypeVal);
+    
+    // Adjust field names below to match your Pricebook Master API field names
+    const config = {
+      appName: "service-management",
+      reportName: "All_Pricebook_Masters",
+      criteria: `(System_Type == "${systemTypeVal}")`,
+      page: 1,
+      perPage: 1
+    };
+
+    ZOHO.CREATOR.API.getAllRecords(config).then(function (response) {   
+      console.log('API Response:', response);
+      if (response && response.data && response.data.length > 0) {
+        const record = response.data[0];
+        console.log(record);
+        let rate = '';
+        if (amcTypeVal === 'Gold') {
+          rate = record.Minimum_AMC_Rate_For_Gold_Contract;
+        } else if (amcTypeVal === 'Silver') {
+          rate = record.Minimum_AMC_Rate_For_Silver_Contract;
+        } else if (amcTypeVal === 'Platinum') {
+          rate = record.Minimum_AMC_Rate_For_Platinum_Contract;
+        }
+        amcRate.value = rate || '';
+        console.log(`AMC Rate for ${amcTypeVal}:`, rate);
+      } else {
+        amcRate.value = '';
+      }
+    }).catch(function (err) {
+      amcRate.value = '';
+      console.error('Error fetching AMC Rate:', err);
+    });
+  }
+
+  if (systemType && amcType) {
+    systemType.addEventListener('change', fetchAmcRate);
+    amcType.addEventListener('change', fetchAmcRate);
+  }
+});
