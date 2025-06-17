@@ -1,24 +1,3 @@
-// function for copying billing address to shipping address
-function copyBillingToShipping() {
-  const checkbox = document.getElementById('sameAsBilling');       
-  if (checkbox.checked) {
-    document.getElementById('shippingStreet1').value = document.getElementById('billingStreet1').value;
-    document.getElementById('shippingStreet2').value = document.getElementById('billingStreet2').value;
-    document.getElementById('shippingStreet3').value = document.getElementById('billingStreet3').value;
-    document.getElementById('shippingCity').value = document.getElementById('billingCity').value;
-    document.getElementById('shippingPostalCode').value = document.getElementById('billingPostalCode').value;
-    document.getElementById('shippingState').value = document.getElementById('billingState').value;
-    document.getElementById('shippingCountry').value = document.getElementById('billingCountry').value;
-  } else {
-    document.getElementById('shippingStreet1').value = '';
-    document.getElementById('shippingStreet2').value = '';
-    document.getElementById('shippingStreet3').value = '';
-    document.getElementById('shippingCity').value = '';
-    document.getElementById('shippingPostalCode').value = '';
-    document.getElementById('shippingState').value = '';
-    document.getElementById('shippingCountry').value = 'India';
-  }
-}
 // Pagination for Child ESN Table
 const CHILD_ESN_PAGE_SIZE = 50;
 let childEsnCurrentPage = 1;
@@ -214,6 +193,13 @@ function populateChildEsnTable(parentEsn, allRecords) {
   if (apsParkingInput) {
     const parentRecord = allRecords.find(r => r.Parent_ESN_Number === parentEsn);
     apsParkingInput.value = parentRecord && parentRecord.APS_PS_Parking_Number ? parentRecord.APS_PS_Parking_Number : '';
+  }
+
+  if (!parentEsn) {
+    clearAllInfoSections();
+    addBlankChildEsnRow();
+    refreshChildEsnPagination();
+    return;
   }
 
   findQualityInspectionByParkingNumber(apsParkingInput ? apsParkingInput.value : '');
@@ -437,3 +423,37 @@ document.addEventListener('DOMContentLoaded', function () {
     amcStartDate.setAttribute('min', minDate);
   }
 });
+
+// clear the Information section, Product Information, Grand Total, and Customer Address Information when the Parent ESN Number is not selected
+function clearAllInfoSections() {
+  // Information Section
+  document.getElementById('customerName').value = '';
+  document.getElementById('subApsNumber').value = '';
+  document.getElementById('projectName').value = '';
+  document.getElementById('invoiceNumber').value = '';
+
+  // Product Information Table
+  const productTableBody = document.getElementById('productTableBody');
+  if (productTableBody) productTableBody.innerHTML = '';
+
+  // Grand Total
+  document.getElementById('grandTotal').value = '';
+
+  // Customer Address Information
+  document.getElementById('billingStreet1').value = '';
+  document.getElementById('billingStreet2').value = '';
+  document.getElementById('billingStreet3').value = '';
+  document.getElementById('billingCity').value = '';
+  document.getElementById('billingPostalCode').value = '';
+  document.getElementById('billingCountry').value = 'India';
+  setDropdownValue('billingState', '');
+
+  document.getElementById('shippingStreet1').value = '';
+  document.getElementById('shippingStreet2').value = '';
+  document.getElementById('shippingStreet3').value = '';
+  document.getElementById('shippingCity').value = '';
+  document.getElementById('shippingPostalCode').value = '';
+  document.getElementById('shippingCountry').value = 'India';
+  setDropdownValue('shippingState', '');
+}
+
