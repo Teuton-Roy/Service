@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Service Quotation Form</title>
-  <script src="https://js.zohostatic.com/creator/widgets/version/1.0/widgetsdk-min.js"></script>
+  <script src=" https://js.zohostatic.com/creator/widgets/version/1.0/widgetsdk-min.js"></script>
   <link rel="stylesheet" href="style.css">
   <script src="script.js"></script>
 </head>
@@ -204,14 +204,12 @@
               <tbody id="childEsnTableBody">
                 <tr>
                   <td>
-                    <input type="text" name="childParentEsn[]" class="form-control">
+                    <input type="text" name="childParentEsn[]" class="form-control" readonly>
                   </td>
-                  <td><input type="text" name="childEsnNumber[]" class="form-control"></td>
-                  <td><input type="text" name="irnNo[]" class="form-control"></td>
-                  <td><input type="datetime-local" name="createdTime[]" class="form-control"></td>
-                  <td>
-                    <button type="button" class="remove-row-btn" onclick="removeChildEsnRow(this)">Remove</button>
-                  </td>
+                  <td><input type="text" name="childEsnNumber[]" class="form-control" readonly></td>
+                  <td><input type="text" name="irnNo[]" class="form-control" readonly></td>
+                  <td><input type="datetime-local" name="createdTime[]" class="form-control" readonly></td>
+                  <td><input type="checkbox" id="childEsnCheckbox" name="childEsnCheckbox"></td>
                 </tr>
               </tbody>
             </table>
@@ -222,7 +220,6 @@
               <button type="button" onclick="nextChildEsnPage()">Next</button>
             </div>
           </div>
-          <!-- <button type="button" class="add-row-btn" onclick="addChildEsnRow()">Add Child ESN</button> -->
         </div>
       </div>
 
@@ -233,22 +230,22 @@
           <div class="form-grid">
             <div class="form-group">
               <label for="customerName">Customer Name</label>
-              <input type="text" id="customerName" name="customerName" class="form-control">
+              <input type="text" id="customerName" name="customerName" class="form-control" readonly>
             </div>
 
             <div class="form-group">
               <label for="subApsNumber">Sub-APS/PS Number</label>
-              <input type="text" id="subApsNumber" name="subApsNumber" class="form-control">
+              <input type="text" id="subApsNumber" name="subApsNumber" class="form-control" readonly>
             </div>
 
             <div class="form-group">
               <label for="projectName">Project Name</label>
-              <input type="text" id="projectName" name="projectName" class="form-control">
+              <input type="text" id="projectName" name="projectName" class="form-control" readonly>
             </div>
 
             <div class="form-group">
               <label for="invoiceNumber">Invoice Number</label>
-              <input type="text" id="invoiceNumber" name="invoiceNumber" class="form-control">
+              <input type="text" id="invoiceNumber" name="invoiceNumber" class="form-control" readonly>
             </div>
           </div>
         </div>
@@ -263,11 +260,11 @@
               <thead>
                 <tr>
                   <th>Product Name</th>
-                  <th>Product Code</th>
+                  <!-- <th>Product Code</th> -->
                   <th>Quantity</th>
                   <th>List Price (₹)</th>
                   <th>Total Amount (₹)</th>
-                  <th>Action</th>
+                  <!-- <th>Action</th> -->
                 </tr>
               </thead>
               <tbody id="productTableBody">
@@ -275,18 +272,15 @@
                   <td>
                     <select name="productName[]" class="product-lookup">
                       <option value="">Select Product</option>
-                      <option value="Product A">Product A</option>
-                      <option value="Product B">Product B</option>
-                      <option value="Product C">Product C</option>
                     </select>
                   </td>
-                  <td><input type="text" name="productCode[]" class="product-code"></td>
-                  <td><input type="number" name="quantity[]" class="quantity" step="0.01"
+                  <!-- <td><input type="text" name="productCode[]" class="product-code" readonly></td> -->
+                  <td><input type="number" name="quantity[]" class="quantity" readonly step="0.01"
                       oninput="calculateRowTotal(this)"></td>
-                  <td><input type="number" name="listPrice[]" class="list-price" step="0.01"
+                  <td><input type="number" name="listPrice[]" class="list-price" readonly step="0.01"
                       oninput="calculateRowTotal(this)"></td>
-                  <td><input type="number" name="totalAmount[]" class="total-amount" step="0.01" readonly></td>
-                  <td><button type="button" class="remove-row-btn" onclick="removeProductRow(this)">Remove</button></td>
+                  <td><input type="number" name="totalAmount[]" class="total-amount" readonly step="0.01" readonly></td>
+                  <!-- <td><button type="button" class="remove-row-btn" onclick="removeProductRow(this)">Remove</button></td> -->
                 </tr>
               </tbody>
             </table>
@@ -314,27 +308,27 @@
               <div class="address-content">
                 <div class="form-group">
                   <label for="billingStreet1">Billing Street 1</label>
-                  <input type="text" id="billingStreet1" name="billingStreet1" class="form-control">
+                  <input type="text" id="billingStreet1" name="billingStreet1" class="form-control" readonly>
                 </div>
                 <div class="form-group">
                   <label for="billingStreet2">Billing Street 2</label>
-                  <input type="text" id="billingStreet2" name="billingStreet2" class="form-control">
+                  <input type="text" id="billingStreet2" name="billingStreet2" class="form-control" readonly>
                 </div>
                 <div class="form-group">
                   <label for="billingStreet3">Billing Street 3</label>
-                  <input type="text" id="billingStreet3" name="billingStreet3" class="form-control">
+                  <input type="text" id="billingStreet3" name="billingStreet3" class="form-control" readonly>
                 </div>
                 <div class="form-group">
                   <label for="billingCity">Billing City</label>
-                  <input type="text" id="billingCity" name="billingCity" class="form-control">
+                  <input type="text" id="billingCity" name="billingCity" class="form-control" readonly>
                 </div>
                 <div class="form-group">
                   <label for="billingPostalCode">Billing Postal Code</label>
-                  <input type="text" id="billingPostalCode" name="billingPostalCode" class="form-control">
+                  <input type="text" id="billingPostalCode" name="billingPostalCode" class="form-control" readonly>
                 </div>
                 <div class="form-group">
                   <label for="billingState">Billing State</label>
-                  <select id="billingState" name="billingState" class="form-control">
+                  <select id="billingState" name="billingState" class="form-control" readonly>
                     <option value="">Select</option>
                     <option value="AN">AN (Andaman and Nico.Is.)</option>
                     <option value="AP">AP (Andhra Pradesh)</option>
@@ -376,7 +370,7 @@
                 </div>
                 <div class="form-group">
                   <label for="billingCountry">Billing Country</label>
-                  <input type="text" id="billingCountry" name="billingCountry" class="form-control" value="India">
+                  <input type="text" id="billingCountry" name="billingCountry" class="form-control" readonly value="India">
                 </div>
               </div>
             </div>
@@ -392,27 +386,27 @@
               <div class="address-content">
                 <div class="form-group">
                   <label for="shippingStreet1">Shipping Street 1</label>
-                  <input type="text" id="shippingStreet1" name="shippingStreet1" class="form-control">
+                  <input type="text" id="shippingStreet1" name="shippingStreet1" class="form-control" readonly>
                 </div>
                 <div class="form-group">
                   <label for="shippingStreet2">Shipping Street 2</label>
-                  <input type="text" id="shippingStreet2" name="shippingStreet2" class="form-control">
+                  <input type="text" id="shippingStreet2" name="shippingStreet2" class="form-control" readonly>
                 </div>
                 <div class="form-group">
                   <label for="shippingStreet3">Shipping Street 3</label>
-                  <input type="text" id="shippingStreet3" name="shippingStreet3" class="form-control">
+                  <input type="text" id="shippingStreet3" name="shippingStreet3" class="form-control" readonly>
                 </div>
                 <div class="form-group">
                   <label for="shippingCity">Shipping City</label>
-                  <input type="text" id="shippingCity" name="shippingCity" class="form-control">
+                  <input type="text" id="shippingCity" name="shippingCity" class="form-control" readonly>
                 </div>
                 <div class="form-group">
                   <label for="shippingPostalCode">Shipping Postal Code</label>
-                  <input type="text" id="shippingPostalCode" name="shippingPostalCode" class="form-control">
+                  <input type="text" id="shippingPostalCode" name="shippingPostalCode" class="form-control" readonly>
                 </div>
                 <div class="form-group">
                   <label for="shippingState">Shipping State</label>
-                  <select id="shippingState" name="shippingState" class="form-control">
+                  <select id="shippingState" name="shippingState" class="form-control" readonly>
                     <option value="">Select</option>
                     <option value="AN">AN (Andaman and Nico.Is.)</option>
                     <option value="AP">AP (Andhra Pradesh)</option>
@@ -454,7 +448,7 @@
                 </div>
                 <div class="form-group">
                   <label for="shippingCountry">Shipping Country</label>
-                  <input type="text" id="shippingCountry" name="shippingCountry" class="form-control" value="India">
+                  <input type="text" id="shippingCountry" name="shippingCountry" class="form-control" readonly value="India">
                 </div>
               </div>
             </div>
