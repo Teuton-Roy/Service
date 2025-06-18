@@ -34,6 +34,18 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 // If you have addChildEsnRow/removeChildEsnRow, call refreshChildEsnPagination() after each change
 
+document.addEventListener('DOMContentLoaded', function () {
+  refreshChildEsnPagination();
+  // Initialize Select2 for Parent ESN dropdown
+  if (window.jQuery && $('#parentESN').length) {
+    $('#parentESN').select2({
+      placeholder: "Select or search Parent ESN Number",
+      allowClear: true,
+      width: 'resolve'
+    });
+  }
+});
+
 // Initialize Zoho Creator
 ZOHO.CREATOR.init().then(async function (data) {
   console.log('Zoho Creator initialized with data:', data);
@@ -118,6 +130,10 @@ function populateParentEsnDropdown(distinctParentESN) {
     select.appendChild(option);
   });
 }
+
+  if (window.jQuery && $('#parentESN').data('select2')) {
+    $('#parentESN').trigger('change.select2');
+  }
 
 // data populate based on Parking Number
 function findQualityInspectionByParkingNumber(parkingNumber) {
