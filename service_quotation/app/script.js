@@ -340,16 +340,17 @@ function populateAddressFields(data) {
 //ensure the dropdown is set only if the value exists
 function setDropdownValue(selectId, value) {
   const select = document.getElementById(selectId);
-  // Extract code if value is like "MH (Maharashtra)"
   let code = value;
   if (typeof value === 'string' && value.includes('(')) {
     code = value.split(' ')[0];
   }
   if (select && Array.from(select.options).some(opt => opt.value === code)) {
     select.value = code;
+    select.disabled = true;
     console.log(`Set ${selectId} to`, code);
   } else if (select) {
     select.value = '';
+    select.disabled = true;
     console.log(`Reset ${selectId} (value not found):`, code);
   }
   if (select) {
