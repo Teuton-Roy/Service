@@ -15,6 +15,7 @@ function showChildEsnPage(page) {
         ? ''
         : 'none';
   });
+
   document.getElementById('childEsnPageInfo').textContent =
     `Page ${childEsnCurrentPage} of ${totalPages || 1}`;
 }
@@ -478,4 +479,42 @@ function clearAllInfoSections() {
   document.getElementById('shippingCountry').value = 'India';
   setDropdownValue('shippingState', '');
 }
+
+function resetFormAndTables() {
+  // Reset the form
+  document.getElementById('serviceQuotationForm').reset();
+
+  // Clear Child ESN Numbers table
+  const childEsnTableBody = document.getElementById('childEsnTableBody');
+  if (childEsnTableBody) childEsnTableBody.innerHTML = '';
+
+  // Clear Parent ESN dropdown
+  const parentEsnSelect = document.getElementById('parentESN');
+  if (parentEsnSelect) {
+    parentEsnSelect.value = '';
+    if (window.jQuery && $(parentEsnSelect).data('select2')) {
+      $(parentEsnSelect).val('').trigger('change');
+    }
+  }
+
+  // Optionally, add a blank row if needed
+  addBlankChildEsnRow();
+
+  // Reset pagination
+  refreshChildEsnPagination();
+
+  // Clear other sections if needed
+  clearAllInfoSections();
+}
+
+// Attach to your Reset button
+document.addEventListener('DOMContentLoaded', function () {
+  const resetBtn = document.getElementById('resetBtn'); // Use your actual Reset button ID
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function (e) {
+      e.preventDefault(); // Prevent default form reset if needed
+      resetFormAndTables();
+    });
+  }
+});
 
