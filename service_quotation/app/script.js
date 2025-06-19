@@ -110,8 +110,13 @@ ZOHO.CREATOR.init().then(async function (data) {
     populateParentEsnDropdown(distinctParentESN); // Populate the dropdown with distinct Parent ESN Numbers
     // Add event listener to the Parent ESN dropdown
     const parentEsnSelect = document.getElementById('parentESN');
-    if (parentEsnSelect) {
-      parentEsnSelect.addEventListener('change', function () {
+    // if (parentEsnSelect) {
+    //   parentEsnSelect.addEventListener('change', function () {
+    //     populateChildEsnTable(this.value, allRecords);
+    //   });
+    // }
+    if (window.jQuery && $('#parentESN').length) {
+      $('#parentESN').on('change', function () {
         populateChildEsnTable(this.value, allRecords);
       });
     }
