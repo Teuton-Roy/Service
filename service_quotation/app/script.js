@@ -122,6 +122,31 @@ ZOHO.CREATOR.init().then(async function (data) {
       });
     }
   });
+
+  document.getElementById('serviceQuotationForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent default form submission
+
+    const formData = buildFormData();
+
+    var config = {
+      appName: "service-management",
+      formName: "Service_Quotation", // Replace with your actual form name
+      data: formData.data
+    };
+
+    ZOHO.CREATOR.API.addRecord(config).then(function(response){
+      if(response.code == 3000){
+        console.log("Record added successfully");
+        // Optionally, show a success message or reset the form here
+      } else {
+        console.error("Failed to add record:", response);
+        // Optionally, show an error message here
+      }
+    }).catch(function(err) {
+      console.error("API error:", err);
+      // Optionally, show an error message here
+    });
+  });
 });
 // function to populate the dropdown
 function populateParentEsnDropdown(distinctParentESN) {
@@ -190,6 +215,8 @@ function findQualityInspectionByParkingNumber(parkingNumber) {
           // Populate Address Fields
           populateAddressFields(detailResponse.data);
 
+          const formData = getParentEsnFormData();
+          console.log('All Form Data:', formData);
         } else {
           console.log('No details found for Quality Inspection ID:', inspectionId);
         }
@@ -498,6 +525,7 @@ function resetFormAndTables() {
       $(parentEsnSelect).val('').trigger('change');
     }
   }
+  console.log('Form and tables reset');
 
   // Optionally, add a blank row if needed
   addBlankChildEsnRow();
@@ -537,3 +565,154 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+
+
+// fetch all data from the form fields
+// function getParentEsnFormData() {
+//   const products = [];
+//   document.querySelectorAll('#productTableBody tr').forEach(row => {
+//     const productNameInput = row.querySelector('select[name="productName[]"]');
+//     const quantityInput = row.querySelector('input[name="quantity[]"]');
+//     if (productNameInput && quantityInput) {
+//       products.push({
+//         Product_Name: productNameInput.value,
+//         Quantity: quantityInput.value
+//       });
+//     }
+//   });
+//   // Get selected Child ESN Numbers
+//   const selectedChildEsnNumbers = getSelectedChildEsnNumbers();
+
+//   return {
+//     Customer_Name: document.getElementById('customerName').value,
+//     Sub_APS_PS_Number: document.getElementById('subApsNumber').value,
+//     Project_Name: document.getElementById('projectName').value,
+//     Invoice_Number: document.getElementById('invoiceNumber').value,
+//     APS_PS_Parking_Number: document.getElementById('apsParking') ? document.getElementById('apsParking').value : '',
+//     Billing_Street_1: document.getElementById('billingStreet1').value,
+//     Billing_Street_2: document.getElementById('billingStreet2').value,
+//     Billing_Street_3: document.getElementById('billingStreet3').value,
+//     Billing_City: document.getElementById('billingCity').value,
+//     Billing_Postal_Code: document.getElementById('billingPostalCode').value,
+//     Billing_Country: document.getElementById('billingCountry').value,
+//     Billing_State: document.getElementById('billingState').value,
+//     Shipping_Street_1: document.getElementById('shippingStreet1').value,
+//     Shipping_Street_2: document.getElementById('shippingStreet2').value,
+//     Shipping_Street_3: document.getElementById('shippingStreet3').value,
+//     Shipping_City: document.getElementById('shippingCity').value,
+//     Shipping_Postal_Code: document.getElementById('shippingPostalCode').value,
+//     Shipping_Country: document.getElementById('shippingCountry').value,
+//     Shipping_State: document.getElementById('shippingState').value,
+//     Grand_Total: document.getElementById('grandTotal').value,
+//     // Add more fields as needed, except Child_ESN_Number
+
+//     System_Type: document.getElementById('systemType') ? document.getElementById('systemType').value : '',
+//     AMC_Type: document.getElementById('amcType') ? document.getElementById('amcType').value : '',
+//     AMC_Rate: document.getElementById('amcRate') ? document.getElementById('amcRate').value : '',
+//     System_Quantity: document.getElementById('systemQuantity') ? document.getElementById('systemQuantity').value : '',
+//     AMC_Start_Date: document.getElementById('amcStartDate') ? document.getElementById('amcStartDate').value : '',
+//     AMC_End_Date: document.getElementById('amcEndDate') ? document.getElementById('amcEndDate').value : '',
+//     Billing_Schedule: document.getElementById('billingSchedule') ? document.getElementById('billingSchedule').value : '',
+//     Sales_Person_Name: document.getElementById('salesPersonName') ? document.getElementById('salesPersonName').value : '',
+//     Payment_Term: document.getElementById('paymentTerm') ? document.getElementById('paymentTerm').value : '',
+//     Last_AMC_Contract_Date: document.getElementById('lastAmcContractDate') ? document.getElementById('lastAmcContractDate').value : '',
+//     Installation_Date: document.getElementById('installationDate') ? document.getElementById('installationDate').value : '',
+//     Last_Contract_Date: document.getElementById('lastContractDate') ? document.getElementById('lastContractDate').value : '',
+//     Last_AMC_Order_Rate: document.getElementById('lastAmcOrderRate') ? document.getElementById('lastAmcOrderRate').value : '',
+
+//     Product_Information: products,
+//     Selected_Child_ESN_Numbers: selectedChildEsnNumbers
+//   };
+// }
+// function getSelectedChildEsnNumbers() {
+//   const selected = [];
+//   document.querySelectorAll('#childEsnTableBody .childEsnCheckbox:checked').forEach(checkbox => {
+//     const row = checkbox.closest('tr');
+//     if (row) {
+//       const esnInput = row.querySelector('input[name="childEsnNumber[]"]');
+//       if (esnInput) {
+//         selected.push(esnInput.value);
+//       }
+//     }
+//   });
+//   return selected;
+// }
+//   document.getElementById('serviceQuotationForm').addEventListener('submit', function(e) {
+//     e.preventDefault(); // Prevent default form submission
+//     const formData = getParentEsnFormData();
+//     console.log('Form Data to submit:', formData);
+//       // Now you can use formData for your API call or further processing
+// });
+
+
+function buildFormData() {
+  // Product Information
+  const products = [];
+  document.querySelectorAll('#productTableBody tr').forEach(row => {
+    const productNameInput = row.querySelector('select[name="productName[]"]');
+    const quantityInput = row.querySelector('input[name="quantity[]"]');
+    if (productNameInput && quantityInput) {
+      products.push({
+        Product_Name: productNameInput.value,
+        Quantity: quantityInput.value
+      });
+    }
+  });
+
+  // Selected Child ESN Numbers
+  const selectedChildEsnNumbers = [];
+  document.querySelectorAll('#childEsnTableBody .childEsnCheckbox:checked').forEach(checkbox => {
+    const row = checkbox.closest('tr');
+    if (row) {
+      const esnInput = row.querySelector('input[name="childEsnNumber[]"]');
+      if (esnInput) {
+        selectedChildEsnNumbers.push(esnInput.value);
+      }
+    }
+  });
+
+  // Build the formData object
+  const formData = {
+    data: {
+      Parent_ESN_Number: document.getElementById('parentESN') ? document.getElementById('parentESN').value : '',
+      APS_PS_Parking_Number: document.getElementById('apsParking') ? document.getElementById('apsParking').value : '',
+      System_Type: document.getElementById('systemType') ? document.getElementById('systemType').value : '',
+      AMC_Type: document.getElementById('amcType') ? document.getElementById('amcType').value : '',
+      AMC_Rate: document.getElementById('amcRate') ? document.getElementById('amcRate').value : '',
+      System_Quantity: document.getElementById('systemQuantity') ? document.getElementById('systemQuantity').value : '',
+      AMC_Start_Date: document.getElementById('amcStartDate') ? document.getElementById('amcStartDate').value : '',
+      AMC_End_Date: document.getElementById('amcEndDate') ? document.getElementById('amcEndDate').value : '',
+      Billing_Schedule: document.getElementById('billingSchedule') ? document.getElementById('billingSchedule').value : '',
+      AMC_Quotation_Status: document.getElementById('amcQuotationStatus') ? document.getElementById('amcQuotationStatus').value : '',
+      Sales_Person_Name: document.getElementById('salesPersonName') ? document.getElementById('salesPersonName').value : '',
+      Payment_Term: document.getElementById('paymentTerm') ? document.getElementById('paymentTerm').value : '',
+      Last_AMC_Contract_Date: document.getElementById('lastAmcContractDate') ? document.getElementById('lastAmcContractDate').value : '',
+      Installation_Date: document.getElementById('installationDate') ? document.getElementById('installationDate').value : '',
+      Last_Contract_Date: document.getElementById('lastContractDate') ? document.getElementById('lastContractDate').value : '',
+      Last_AMC_Order_Rate: document.getElementById('lastAmcOrderRate') ? document.getElementById('lastAmcOrderRate').value : '',
+      Child_ESN_Numbers: selectedChildEsnNumbers, // Array of selected Child ESN Numbers
+
+      Product_Information: products, // Array of {Product_Name, Quantity}
+      Billing_Street_1: document.getElementById('billingStreet1').value,
+      Billing_Street_2: document.getElementById('billingStreet2').value,
+      Billing_Street_3: document.getElementById('billingStreet3').value,
+      Billing_City: document.getElementById('billingCity').value,
+      Billing_State: document.getElementById('billingState').value,
+      Billing_Postal_Code: document.getElementById('billingPostalCode').value,
+      Billing_Country: document.getElementById('billingCountry').value,
+
+      Shipping_Street_1: document.getElementById('shippingStreet1').value,
+      Shipping_Street_2: document.getElementById('shippingStreet2').value,
+      Shipping_Street_3: document.getElementById('shippingStreet3').value,
+      Shipping_City: document.getElementById('shippingCity').value,
+      Shipping_State: document.getElementById('shippingState').value,
+      Shipping_Postal_Code: document.getElementById('shippingPostalCode').value,
+      Shipping_Country: document.getElementById('shippingCountry').value,
+    }
+  };
+  return formData;
+}
+
+// Example usage:
+const formData = buildFormData();
+console.log(formData);
