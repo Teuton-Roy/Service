@@ -241,13 +241,14 @@ function populateChildEsnTable(parentEsn, allRecords) {
     filtered.forEach(function (rec, idx) {
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td><input type="checkbox" id="childEsnCheckbox" name="childEsnCheckbox"></td>
+        <td><input type="checkbox" class="childEsnCheckbox" name="childEsnCheckbox"></td>
         <td><input type="text" name="childParentEsn[]" class="form-control" value="${rec.Parent_ESN_Number || ''}" readonly></td>
         <td><input type="text" name="childEsnNumber[]" class="form-control" value="${rec.Child_ESN_Number || ''}" readonly></td>
         <td><input type="text" name="irnNo[]" class="form-control" value="${rec.IRN_Number || ''}" readonly></td>
         <td><input type="datetime-local" name="createdTime[]" class="form-control" value="${rec.Added_Time ? new Date(rec.Added_Time).toISOString().slice(0,16) : ''}" readonly></td>
       `;
       // <td><button type="button" class="select-row-btn" onclick="onChildEsnRowSelect(this)">Select</button></td>
+      // <td><input type="checkbox" id="childEsnCheckbox" name="childEsnCheckbox"></td>
       tbody.appendChild(tr);
     });
     // Add event listeners to all child ESN selects
@@ -266,12 +267,13 @@ function addBlankChildEsnRow() {
   const tbody = document.getElementById('childEsnTableBody');
   const tr = document.createElement('tr');
   tr.innerHTML = `
-    <td><input type="checkbox" id="childEsnCheckbox" name="childEsnCheckbox"></td>
+    <td><input type="checkbox" class="childEsnCheckbox" name="childEsnCheckbox"></td>
     <td><input type="text" name="childParentEsn[]" class="form-control"></td>
     <td><input type="text" name="childEsnNumber[]" class="form-control"></td>
     <td><input type="text" name="irnNo[]" class="form-control"></td>
     <td><input type="datetime-local" name="createdTime[]" class="form-control"></td>
   `;
+  // <td><input type="checkbox" id="childEsnCheckbox" name="childEsnCheckbox"></td>
   tbody.appendChild(tr);
 }
 
@@ -518,3 +520,20 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+// Select Child ESN Number from the table on click of checkbox
+document.addEventListener('DOMContentLoaded', function () {
+  const childEsnTableBody = document.getElementById('childEsnTableBody');
+  if (childEsnTableBody) {
+    childEsnTableBody.addEventListener('change', function(e) {
+      if (e.target && e.target.classList.contains('childEsnCheckbox')) {
+        const row = e.target.closest('tr');
+        if (row) {
+          const childEsnInput = row.querySelector('input[name="childEsnNumber[]"]');
+          if (childEsnInput) {
+            console.log('Selected Child ESN Number:', childEsnInput.value);
+          }
+        }
+      }
+    });
+  }
+});
