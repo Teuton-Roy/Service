@@ -126,7 +126,12 @@ ZOHO.CREATOR.init().then(async function (data) {
   document.getElementById('serviceQuotationForm').addEventListener('submit', function(e) {
     e.preventDefault(); // Prevent default form submission
 
+    // Clear previous error message
+    const errorDiv = document.getElementById('formErrorMsg');
+    if (errorDiv) errorDiv.textContent = '';
+
     const formData = buildFormData();
+    console.log("Submit Data: ",formData);
 
     var config = {
       appName: "service-management",
@@ -138,13 +143,23 @@ ZOHO.CREATOR.init().then(async function (data) {
       if(response.code == 3000){
         console.log("Record added successfully");
         // Optionally, show a success message or reset the form here
+        if (errorDiv) {
+          errorDiv.style.color = 'green';
+          errorDiv.textContent = "Record added successfully!";
+        }
       } else {
         console.error("Failed to add record:", response);
-        // Optionally, show an error message here
+        if (errorDiv) {
+          errorDiv.style.color = 'red';
+          errorDiv.textContent = "Failed to add record. Please check your input and try again.";
+        }
       }
     }).catch(function(err) {
       console.error("API error:", err);
-      // Optionally, show an error message here
+      if (errorDiv) {
+        errorDiv.style.color = 'red';
+        errorDiv.textContent = "API error occurred. Please try again later.";
+      }
     });
   });
 });
@@ -690,9 +705,15 @@ function buildFormData() {
       Installation_Date: document.getElementById('installationDate') ? document.getElementById('installationDate').value : '',
       Last_Contract_Date: document.getElementById('lastContractDate') ? document.getElementById('lastContractDate').value : '',
       Last_AMC_Order_Rate: document.getElementById('lastAmcOrderRate') ? document.getElementById('lastAmcOrderRate').value : '',
-      Child_ESN_Numbers: selectedChildEsnNumbers, // Array of selected Child ESN Numbers
+      
+      Customer_Name: document.getElementById('customerName').value,
+      Sub_APS_PS_Number: document.getElementById('subApsNumber').value,
+      Project_Name: document.getElementById('projectName').value,
+      Invoice_Number: document.getElementById('invoiceNumber').value,
 
-      Product_Information: products, // Array of {Product_Name, Quantity}
+      Child_ESN_Numbers: selectedChildEsnNumbers, 
+      Product_Information: products,
+      
       Billing_Street_1: document.getElementById('billingStreet1').value,
       Billing_Street_2: document.getElementById('billingStreet2').value,
       Billing_Street_3: document.getElementById('billingStreet3').value,
@@ -712,7 +733,3 @@ function buildFormData() {
   };
   return formData;
 }
-
-// Example usage:
-const formData = buildFormData();
-console.log(formData);
