@@ -123,8 +123,27 @@ ZOHO.CREATOR.init().then(async function (data) {
     }
   });
 
+  let config2 = {
+    appName: "service-management",
+    reportName: "All_Service_Quotation",
+  }
+  ZOHO.CREATOR.API.getAllRecords(config2).then(function (response) {
+    if (response && response.data) {
+      console.log('All Service Quotation Records:', response.data);
+    }
+  })
+
   document.getElementById('serviceQuotationForm').addEventListener('submit', function(e) {
     e.preventDefault(); // Prevent default form submission
+
+    // AMC End Date validation
+    const amcStartDate = document.getElementById('amcStartDate').value;
+    const amcEndDate = document.getElementById('amcEndDate').value;
+    if (amcStartDate && amcEndDate && amcEndDate <= amcStartDate) {
+      alert('AMC End Date must be after the AMC Start Date.');
+      document.getElementById('amcEndDate').value = '';
+      return;
+    }
 
     // Clear previous error message
     const errorDiv = document.getElementById('formErrorMsg');
@@ -141,6 +160,7 @@ ZOHO.CREATOR.init().then(async function (data) {
 
     ZOHO.CREATOR.API.addRecord(config).then(function(response){
       if(response.code == 3000){
+        console.log();
         console.log("Record added successfully");
         // Optionally, show a success message or reset the form here
         if (errorDiv) {
@@ -490,6 +510,7 @@ document.addEventListener('DOMContentLoaded', function () {
     amcStartDate.setAttribute('min', minDate);
   }
 });
+
 
 // clear the Information section, Product Information, Grand Total, and Customer Address Information when the Parent ESN Number is not selected
 function clearAllInfoSections() {
