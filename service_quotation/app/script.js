@@ -102,9 +102,11 @@ ZOHO.CREATOR.init().then(async function (data) {
     let distinctParentESN = []
     for (let i = 0; i < allRecords.length; i++){
       let parentESN = allRecords[i].Parent_ESN_Number;
+      let parentId = allRecords[i].ID;
       if(parentESN && visited.indexOf(parentESN) === -1){
         visited.push(parentESN);
         distinctParentESN.push(parentESN);
+        // distinctParentESN.push(parentId);
       }
     }
     console.log('Distinct Parent ESN Numbers:', distinctParentESN);
@@ -123,13 +125,25 @@ ZOHO.CREATOR.init().then(async function (data) {
     }
   });
 
+  window.distinctParentEsnWithIds = [];
+  for (let i = 0; i < allRecords.length; i++) {
+    let parentESN = allRecords[i].Parent_ESN_Number;
+    let parentId = allRecords[i].ID;
+    if (parentESN && !window.distinctParentEsnWithIds.some(e => e.Parent_ESN_Number === parentESN)) {
+      window.distinctParentEsnWithIds.push({
+        Parent_ESN_Number: parentESN,
+        ID: parentId
+      });
+    }
+  }
+
   let config2 = {
     appName: "service-management",
     reportName: "All_Service_Quotation",
   }
   ZOHO.CREATOR.API.getAllRecords(config2).then(function (response) {
     if (response && response.data) {
-      console.log('All Service Quotation Records:', response.data);
+      console.log('Service Quotation Records:', response.data);
     }
   })
 
@@ -155,7 +169,7 @@ ZOHO.CREATOR.init().then(async function (data) {
     var config = {
       appName: "service-management",
       formName: "Service_Quotation", // Replace with your actual form name
-      data: formData.data
+      data: formData
     };
 
     ZOHO.CREATOR.API.addRecord(config).then(function(response){
@@ -219,7 +233,7 @@ function findQualityInspectionByParkingNumber(parkingNumber) {
     if (response && response.data && response.data.length > 0) {
       const inspectionRecord = response.data[0];
       const inspectionId = inspectionRecord.ID;
-      console.log(inspectionId);
+      // console.log(inspectionId);
 
       // Fetch full record details using the ID
       ZOHO.CREATOR.API.getRecordById({
@@ -229,11 +243,16 @@ function findQualityInspectionByParkingNumber(parkingNumber) {
       }).then(function(detailResponse) {
         if (detailResponse && detailResponse.data) {   
           // Use detailResponse.data as needed  
-          console.log(detailResponse.data)
+          console.log("Quality Inspection data: ",detailResponse.data)
+          let ID = detailResponse.data.ID;
+          console.log(ID);
+          
           const productInfoArr = detailResponse.data.Product_Information;           
           if (Array.isArray(productInfoArr)) {
             productInfoArr.forEach(function(product, idx) {
               const displayValue = product.display_value;
+              const productId = product.ID; // Fetch the product ID
+              console.log(`Product ${idx + 1} ID:`, productId);
               console.log(`Product ${idx + 1} Display Value:`, displayValue);
               const displayParts = displayValue.split(' ');
               console.log(`Product ${idx + 1} Parts:`, displayParts);
@@ -250,8 +269,8 @@ function findQualityInspectionByParkingNumber(parkingNumber) {
           // Populate Address Fields
           populateAddressFields(detailResponse.data);
 
-          const formData = getParentEsnFormData();
-          console.log('All Form Data:', formData);
+          // const formData = getParentEsnFormData();
+          // console.log('All Form Data:', formData);
         } else {
           console.log('No details found for Quality Inspection ID:', inspectionId);
         }
@@ -272,11 +291,19 @@ function populateChildEsnTable(parentEsn, allRecords) {
   const tbody = document.getElementById('childEsnTableBody');
   tbody.innerHTML = '';
 
-  // Set APS/PS Parking Number for the first matching record
   const apsParkingInput = document.getElementById('apsParking');
   if (apsParkingInput) {
     const parentRecord = allRecords.find(r => r.Parent_ESN_Number === parentEsn);
-    apsParkingInput.value = parentRecord && parentRecord.APS_PS_Parking_Number ? parentRecord.APS_PS_Parking_Number : '';
+    // If APS_PS_Parking_Number is a lookup, use its ID
+    if (parentRecord && parentRecord.APS_PS_Parking_Number && typeof parentRecord.APS_PS_Parking_Number === 'object') {
+      apsParkingInput.value = parentRecord.APS_PS_Parking_Number.ID || '';
+    } else if (parentRecord && parentRecord.APS_PS_Parking_Number) {
+      // Fallback to value if not an object
+      apsParkingInput.value = parentRecord.APS_PS_Parking_Number;
+    } else {
+      apsParkingInput.value = '';
+    }
+    console.log(apsParkingInput);
   }
 
   if (!parentEsn) {
@@ -353,6 +380,7 @@ function populateProductTable(productInfoArr) {
     const quantity = displayParts[1] || '';
     const listPrice = displayParts[2] || '';
     const totalAmount = (parseFloat(quantity) * parseFloat(listPrice)) || 0;
+    
 
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -682,6 +710,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 function buildFormData() {
+  const parentEsnSelect1 = document.getElementById('parentESN');
+  let apsParkingId = '';
+  if (parentEsnSelect1 && window.allRecords) {
+    const parentRecord = window.allRecords.find(r => r.Parent_ESN_Number === parentEsnSelect1.value);
+    if (parentRecord && parentRecord.APS_PS_Parking_Number) {
+      if (typeof parentRecord.APS_PS_Parking_Number === 'object') {
+        apsParkingId = parentRecord.APS_PS_Parking_Number.ID || '';
+      } else {
+        apsParkingId = parentRecord.APS_PS_Parking_Number;
+      }
+    }
+  }
+
+  const parentEsnSelect = document.getElementById('parentESN');
+  let parentEsnObj = '';
+  if (parentEsnSelect && window.distinctParentEsnWithIds) {
+    const selectedDisplayValue = parentEsnSelect.value;
+    const found = window.distinctParentEsnWithIds.find(
+      esn => esn.Parent_ESN_Number === selectedDisplayValue
+    );
+    if (found) {
+      parentEsnObj = {
+        ID: found.ID,
+        display_value: found.Parent_ESN_Number
+      };
+    }
+  }
+
   // Product Information
   const products = [];
   document.querySelectorAll('#productTableBody tr').forEach(row => {
@@ -710,8 +766,10 @@ function buildFormData() {
   // Build the formData object
   const formData = {
     data: {
-      Parent_ESN_Number: document.getElementById('parentESN') ? document.getElementById('parentESN').value : '',
-      APS_PS_Parking_Number: document.getElementById('apsParking') ? document.getElementById('apsParking').value : '',
+      // Parent_ESN_Number: document.getElementById('parentESN') ? document.getElementById('parentESN').value : '',
+      Parent_ESN_Number: parentEsnObj,
+      // APS_PS_Parking_Number: document.getElementById('apsParking') ? document.getElementById('apsParking').value : '',
+      APS_PS_Parking_Number: apsParkingId,
       System_Type: document.getElementById('systemType') ? document.getElementById('systemType').value : '',
       AMC_Type: document.getElementById('amcType') ? document.getElementById('amcType').value : '',
       AMC_Rate: document.getElementById('amcRate') ? document.getElementById('amcRate').value : '',
